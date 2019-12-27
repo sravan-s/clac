@@ -140,7 +140,7 @@ impl Operation {
     }
   }
 
-  /// Checks if an string is an operation
+  /// Checks if an string is a mathematical operator
   pub fn is_operation(token: &str) -> bool {
     let op = Operation::from_str(&token);
     match op {
