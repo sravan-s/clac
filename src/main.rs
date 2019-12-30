@@ -4,19 +4,15 @@ mod stack;
 use stack::Stack;
 
 mod commands;
-use commands::Operation;
 
 mod token_types;
 use token_types::TokenType;
 
-fn compute(mut s: Stack) -> Stack {
-  let token = s.pop().unwrap();
-  println!("{:?}", Operation::is_operation(&token));
-  Stack::init(100)
-}
+mod postfix_math;
+use postfix_math::compute;
 
 fn main() {
-  // let mut stash = Stack::init(100);
+  let stash = Stack::init(100);
   let mut variable_stack = Stack::init(100);
   let mut operator_stack = Stack::init(100);
   let mut args: Vec<String> = env::args().collect();
@@ -31,5 +27,5 @@ fn main() {
       _ => panic!("Unknown type {:?}", arg),
     };
   }
-  compute(variable_stack);
+  compute(variable_stack, operator_stack, stash);
 }

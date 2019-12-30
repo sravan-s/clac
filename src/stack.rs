@@ -5,7 +5,7 @@ pub struct Stack {
   /// Max size of the stack
   max_size: usize,
   /// No:of items in stack
-  items: Vec<String>,
+  pub items: Vec<String>,
 }
 
 impl Stack {
@@ -29,6 +29,11 @@ impl Stack {
   /// Pop items from stack
   pub fn pop(&mut self) -> Option<String> {
     self.items.pop()
+  }
+
+  /// Returns length of the stack
+  pub fn len(&mut self) -> usize {
+    self.items.len()
   }
 }
 
@@ -81,5 +86,15 @@ mod tests {
       None => String::from("")
     };
     assert_eq!(poppped, String::from(""));
+  }
+
+  #[test]
+  fn test_size_of_stack() {
+    let size = 7;
+    let mut stack = super::Stack::init(size);
+    for _num in 0 .. size {
+      stack.push(String::from("a"));
+    }
+    assert_eq!(size, stack.len());
   }
 }
